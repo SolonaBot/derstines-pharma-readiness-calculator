@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Derstine's Pharma Entry Roadmap</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --ink: #142033;
+      --muted: #5a6a82;
+      --line: #d9e1ec;
+      --accent: #0b5fff;
+      --accent-2: #eaf1ff;
+      --good: #0a7f42;
+      --warn: #a56200;
+      --risk: #b42318;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.45;
+    }
+    header {
+      padding: 28px 24px 18px;
+      background: linear-gradient(180deg, #fdfefe 0%, #f4f7fb 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    .subtitle { margin: 0; color: var(--muted); max-width: 980px; }
+    .wrap {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      padding: 20px 24px 28px;
+      align-items: start;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 1px 2px rgba(16,24,40,.04);
+      padding: 16px;
+    }
+    .card h2 { margin: 0 0 12px; font-size: 18px; }
+    .stack > * + * { margin-top: 10px; }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #24324a;
+    }
+    input, select {
+      width: 100%;
+      border: 1px solid #bcc8d8;
+      border-radius: 10px;
+      padding: 9px 10px;
+      background: #fff;
+      font-size: 14px;
+    }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .tile {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .tile .label { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+    .tile .value { margin-top: 6px; font-size: 24px; font-weight: 800; }
+    .tile .sub { margin-top: 6px; font-size: 12px; color: var(--muted); }
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+    .badge.good { background: #e9f8ef; color: var(--good); }
+    .badge.warn { background: #fff4e5; color: var(--warn); }
+    .badge.risk { background: #fdecec; color: var(--risk); }
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+    .timeline:before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: #d4dceb;
+    }
+    .phase {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .phase:before {
+      content: "";
+      position: absolute;
+      left: -25px;
+      top: 20px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-2);
+    }
+    .phase h3 { margin: 0 0 6px; font-size: 18px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+    ul { margin: 8px 0 0 18px; padding: 0; }
+    li + li { margin-top: 4px; }
+    .section-title { margin: 18px 0 10px; font-size: 16px; font-weight: 800; }
+    .note {
+      background: #fff8e8;
+      border: 1px solid #f3dda4;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 13px;
+      color: #5f4a00;
+    }
+    .footer-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    @media (max-width: 980px) {
+      .wrap { grid-template-columns: 1fr; }
+      .kpis { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .kpis, .row { grid-template-columns: 1fr; }
+      header { padding: 20px 16px 14px; }
+      .wrap { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Derstine's Pharma Entry Roadmap</h1>
+    <p class="subtitle">Interactive roadmap for moving Derstine's from excess cold-storage capacity to a defined, licensable, customer-qualifiable pharmaceutical service lane. Built for client conversation use: no external dependencies, no login, no server-side logic.</p>
+  </header>
+
+  <div class="wrap">
+    <aside class="card stack">
+      <h2>Scenario controls</h2>
+
+      <div>
+        <label for="pharmaShare">Share of capacity allocated to pharma (%)</label>
+        <input id="pharmaShare" type="number" min="1" max="100" step="1" value="40" />
+      </div>
+
+      <div>
+        <label for="serviceModel">Service model</label>
+        <select id="serviceModel">
+          <option value="storage_only">Storage only</option>
+          <option value="storage_plus_distribution" selected>Storage + distribution</option>
+          <option value="storage_distribution_transport">Storage + distribution + transport</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="tempProfile">Temperature profile</label>
+        <select id="tempProfile">
+          <option value="ambient">Ambient only</option>
+          <option value="ambient_plus_2_8C" selected>Ambient + 2–8°C</option>
+          <option value="multi_band_including_frozen">Multi-band incl. frozen</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="roleModel">Regulatory role model</label>
+        <select id="roleModel">
+          <option value="3pl" selected>3PL / warehousing-logistics partner</option>
+          <option value="distributor">Wholesale distributor / title-taking role</option>
+        </select>
+        <div class="hint">This changes licensing emphasis and control burden.</div>
+      </div>
+
+      <div>
+        <label for="targetTier">Target readiness tier</label>
+        <select id="targetTier">
+          <option value="pilot_entry">Pilot entry</option>
+          <option value="audit_ready" selected>Audit-ready</option>
+          <option value="enterprise_ready">Enterprise-ready</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="baseline">Current maturity baseline</label>
+        <select id="baseline">
+          <option value="early" selected>Early / lightly structured</option>
+          <option value="moderate">Moderate / partly structured</option>
+          <option value="strong">Strong / already disciplined</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="controlled">Controlled substances in scope?</label>
+        <select id="controlled">
+          <option value="no" selected>No</option>
+          <option value="yes">Yes</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="manipulation">Repackaging / relabeling / product manipulation?</label>
+        <select id="manipulation">
+          <option value="no" selected>No</option>
+          <option value="yes">Yes</option>
+        </select>
+      </div>
+
+      <div class="note">
+        <strong>Recommended for Derstine's phase 1:</strong><br>
+        3PL-style model, storage + bounded distribution, ambient/2–8°C only, no controlled substances, no repackaging/relabeling, audit-ready target.
+      </div>
+
+      <div class="footer-note">
+        This roadmap is designed to be stable in a client meeting. It does not depend on any external library or API at runtime.
+      </div>
+    </aside>
+
+    <main>
+      <section class="kpis">
+        <div class="tile">
+          <div class="label">Scenario</div>
+          <div class="value" id="scenarioName">Recommended Phase 1</div>
+          <div class="sub" id="scenarioSummary">Bounded pharma storage + distribution entry lane</div>
+        </div>
+        <div class="tile">
+          <div class="label">Likely roadmap length</div>
+          <div class="value" id="timelineValue">20–29 wks</div>
+          <div class="sub">Assessment through first qualification-ready lane</div>
+        </div>
+        <div class="tile">
+          <div class="label">Complexity</div>
+          <div class="value" id="complexityValue">Moderate</div>
+          <div class="sub" id="complexityDetail">Controlled build with defined exclusions</div>
+        </div>
+        <div class="tile">
+          <div class="label">Priority risk</div>
+          <div class="value" id="priorityRisk">Licensing + QMS</div>
+          <div class="sub">Main gating issue if mis-scoped</div>
+        </div>
+      </section>
+
+      <section class="card" style="margin-bottom:18px;">
+        <h2>Strategic readout</h2>
+        <div id="strategicReadout"></div>
+      </section>
+
+      <section class="timeline" id="timeline"></section>
+    </main>
+  </div>
+
+<script>
+const phases = [
+  {
+    id: 'phase0',
+    title: 'Phase 0 — Target lane definition',
+    baseWeeks: [1, 2],
+    goal: 'Define exactly what Derstine\'s is and is not trying to become in phase 1.',
+    work: [
+      'Leadership discovery and commercial-intent workshop',
+      'Product / temperature / service-scope definition',
+      '3PL vs wholesale-distributor role decision framing',
+      'Explicit phase-1 exclusion list',
+      'Client-safe claims boundary'
+    ],
+    outputs: [
+      'Target Service Lane Definition',
+      'Phase-1 Exclusion List',
+      'Preliminary licensing / authorization map',
+      'Commercial positioning boundaries'
+    ]
+  },
+  {
+    id: 'phase1',
+    title: 'Phase 1 — Readiness assessment',
+    baseWeeks: [3, 4],
+    goal: 'Measure the real gap between existing cold-storage capability and pharma-entry reality.',
+    work: [
+      'Facility / dock / segregation / backup-power review',
+      'Monitoring / alarm / excursion / calibration review',
+      'QMS, SOP, training, CAPA, change-control review',
+      'Traceability / WMS / inventory-status review',
+      'Licensing / authorization trigger analysis',
+      'Customer qualification expectation analysis'
+    ],
+    outputs: [
+      'Current-State Gap Assessment',
+      'Readiness scorecard',
+      'Risk register',
+      'Licensing / authorization trigger map',
+      'ROM estimate update',
+      'Go / no-go / narrow-scope recommendation'
+    ]
+  },
+  {
+    id: 'phase2',
+    title: 'Phase 2 — Operating model and implementation blueprint',
+    baseWeeks: [3, 5],
+    goal: 'Convert the assessment into a buildable future-state design.',
+    work: [
+      'Future-state operating model design',
+      'Quality-system architecture',
+      'Monitoring / mapping / qualification design',
+      'Segregation / hold / reject / return logic',
+      'Traceability / reporting / WMS design requirements',
+      'Staffing and governance design',
+      'Customer qualification framework'
+    ],
+    outputs: [
+      'Implementation roadmap',
+      'QMS architecture and control matrix',
+      'Monitoring / qualification roadmap',
+      'Staffing and governance recommendations',
+      'Client claims / communications guardrails'
+    ]
+  },
+  {
+    id: 'phase3',
+    title: 'Phase 3 — Build the lane',
+    baseWeeks: [8, 14],
+    goal: 'Implement the quality, operational, and evidence systems required for a bounded pharma lane.',
+    work: [
+      'SOP and controlled-document buildout',
+      'Training and accountability implementation',
+      'Deviation / CAPA / change-control rollout',
+      'Monitoring / alarms / excursion workflows',
+      'Segregation and inventory-status controls',
+      'Traceability / reporting / system changes',
+      'Management-review and implementation governance'
+    ],
+    outputs: [
+      'Controlled-document package',
+      'Training matrix',
+      'Operational workflow package',
+      'Implementation tracker and remediation log'
+    ]
+  },
+  {
+    id: 'phase4',
+    title: 'Phase 4 — Qualification and audit readiness',
+    baseWeeks: [4, 6],
+    goal: 'Pressure-test the lane before a serious customer does.',
+    work: [
+      'Mock audit / mock customer review',
+      'Quality questionnaire preparation',
+      'Quality agreement framework support',
+      'Evidence-pack review',
+      'Claims language review',
+      'Gap closeout for phase-1 launch'
+    ],
+    outputs: [
+      'Audit Readiness Package',
+      'Customer Qualification Dossier',
+      'Capability statement language',
+      'Readiness opinion / remaining-gaps report'
+    ]
+  },
+  {
+    id: 'phase5',
+    title: 'Phase 5 — Pilot customer onboarding',
+    baseWeeks: [4, 8],
+    goal: 'Support the first serious customer qualification cycle without breaking the system.',
+    work: [
+      'Customer technical-meeting support',
+      'Audit / questionnaire response support',
+      'Customer-specific gap closure sequencing',
+      'Quality agreement support',
+      'Initial onboarding / stabilization support'
+    ],
+    outputs: [
+      'Customer-specific qualification package',
+      'Pilot onboarding support plan',
+      'Post-pilot lessons learned and next-lane recommendations'
+    ]
+  }
+];
+
+function fmtWeeks(range){ return `${range[0]}–${range[1]} wks`; }
+function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+function getScenario(){
+  return {
+    pharmaShare: Number(document.getElementById('pharmaShare').value || 40),
+    serviceModel: document.getElementById('serviceModel').value,
+    tempProfile: document.getElementById('tempProfile').value,
+    roleModel: document.getElementById('roleModel').value,
+    targetTier: document.getElementById('targetTier').value,
+    baseline: document.getElementById('baseline').value,
+    controlled: document.getElementById('controlled').value,
+    manipulation: document.getElementById('manipulation').value,
+  };
+}
+function getComplexity(s){
+  let score = 0;
+  if (s.serviceModel === 'storage_plus_distribution') score += 1;
+  if (s.serviceModel === 'storage_distribution_transport') score += 2;
+  if (s.tempProfile === 'multi_band_including_frozen') score += 2;
+  if (s.targetTier === 'enterprise_ready') score += 2;
+  if (s.roleModel === 'distributor') score += 2;
+  if (s.controlled === 'yes') score += 3;
+  if (s.manipulation === 'yes') score += 3;
+  if (s.baseline === 'early') score += 2;
+  if (s.baseline === 'moderate') score += 1;
+  if (s.pharmaShare >= 50) score += 1;
+  if (score <= 3) return { label: 'Moderate', level: 'warn' };
+  if (score <= 7) return { label: 'Elevated', level: 'warn' };
+  return { label: 'High-risk', level: 'risk' };
+}
+function adjustRange(range, minAdd, maxAdd){ return [range[0]+minAdd, range[1]+maxAdd]; }
+function buildPhaseRanges(s){
+  return phases.map(p => {
+    let r = [...p.baseWeeks];
+    if (s.baseline === 'early' && ['phase1','phase2','phase3'].includes(p.id)) r = adjustRange(r,1,2);
+    if (s.serviceModel === 'storage_distribution_transport' && ['phase1','phase2','phase3','phase4'].includes(p.id)) r = adjustRange(r,1,2);
+    if (s.tempProfile === 'multi_band_including_frozen' && ['phase1','phase2','phase3','phase4'].includes(p.id)) r = adjustRange(r,1,2);
+    if (s.roleModel === 'distributor' && ['phase0','phase1','phase2'].includes(p.id)) r = adjustRange(r,1,1);
+    if (s.controlled === 'yes' && ['phase0','phase1','phase2','phase3','phase4'].includes(p.id)) r = adjustRange(r,2,3);
+    if (s.manipulation === 'yes' && ['phase0','phase1','phase2','phase3','phase4'].includes(p.id)) r = adjustRange(r,2,4);
+    if (s.targetTier === 'enterprise_ready' && ['phase2','phase3','phase4'].includes(p.id)) r = adjustRange(r,1,3);
+    return { ...p, weeks: [clamp(r[0],1,99), clamp(r[1],r[0],120)] };
+  });
+}
+function getRiskText(s){
+  if (s.controlled === 'yes') return 'Controlled-substance burden';
+  if (s.manipulation === 'yes') return 'Manufacturing-type scope creep';
+  if (s.roleModel === 'distributor') return 'Licensing / title-taking model';
+  if (s.baseline === 'early') return 'Licensing + QMS';
+  return 'Qualification evidence';
+}
+function getScenarioName(s){
+  if (s.controlled === 'yes' || s.manipulation === 'yes') return 'Aggressive expansion case';
+  if (s.roleModel === 'distributor') return 'Distributor-led entry case';
+  if (s.serviceModel === 'storage_only') return 'Conservative storage-only case';
+  return 'Recommended Phase 1';
+}
+function getScenarioSummary(s){
+  const parts = [];
+  parts.push(s.roleModel === '3pl' ? '3PL-style' : 'Distributor-style');
+  parts.push(s.serviceModel === 'storage_only' ? 'storage only' : s.serviceModel === 'storage_plus_distribution' ? 'storage + distribution' : 'storage + distribution + transport');
+  parts.push(s.tempProfile === 'ambient' ? 'ambient' : s.tempProfile === 'ambient_plus_2_8C' ? 'ambient/2–8°C' : 'multi-band/frozen');
+  return parts.join(' • ');
+}
+function getReadout(s, ranges){
+  const total = ranges.reduce((a,p)=>[a[0]+p.weeks[0], a[1]+p.weeks[1]],[0,0]);
+  const warnings = [];
+  const recommendations = [];
+  if (s.controlled === 'yes') warnings.push('Controlled substances in phase 1 materially increases security, reconciliation, licensing, and inspection burden.');
+  if (s.manipulation === 'yes') warnings.push('Repackaging / relabeling pushes the scope toward a much heavier cGMP/manufacturing-type burden and is not recommended for a first lane unless commercially unavoidable.');
+  if (s.roleModel === 'distributor') warnings.push('A title-taking distributor model is more complex than a 3PL-style lane and should only be chosen if commercially necessary.');
+  if (s.tempProfile === 'multi_band_including_frozen') warnings.push('Multi-band/frozen scope materially increases qualification, monitoring, and failure-mode complexity.');
+
+  recommendations.push('Define the phase-1 lane before discussing broad pharma claims.');
+  recommendations.push('Keep phase 1 bounded unless a real commercial requirement justifies higher burden.');
+  recommendations.push('Treat customer qualification readiness as the real launch standard, not just internal completion.');
+  if (s.roleModel !== '3pl') recommendations.push('Re-test whether a 3PL-style model could achieve the commercial goal with less licensing burden.');
+  if (s.controlled === 'yes' || s.manipulation === 'yes') recommendations.push('Strongly consider moving controlled substances and product manipulation to a later phase.');
+
+  return { total, warnings, recommendations };
+}
+function render(){
+  const s = getScenario();
+  const ranges = buildPhaseRanges(s);
+  const complexity = getComplexity(s);
+  const readout = getReadout(s, ranges);
+
+  document.getElementById('scenarioName').textContent = getScenarioName(s);
+  document.getElementById('scenarioSummary').textContent = getScenarioSummary(s);
+  document.getElementById('timelineValue').textContent = `${readout.total[0]}–${readout.total[1]} wks`;
+  document.getElementById('complexityValue').textContent = complexity.label;
+  document.getElementById('complexityDetail').textContent = complexity.label === 'Moderate' ? 'Bounded, manageable entry lane' : complexity.label === 'Elevated' ? 'Requires disciplined scoping and sequencing' : 'High execution risk if not narrowed';
+  document.getElementById('priorityRisk').textContent = getRiskText(s);
+
+  const strategic = `
+    <div class="meta">Recommended interpretation of the current scenario</div>
+    <p><strong>${getScenarioName(s)}</strong> is projected at <strong>${readout.total[0]}–${readout.total[1]} weeks</strong> from lane definition through first qualification-ready lane, assuming executive responsiveness and no major surprise remediation. The current profile is <span class="badge ${complexity.level}">${complexity.label}</span>.</p>
+    <div class="section-title">What we would tell Derstine's</div>
+    <ul>${readout.recommendations.map(x=>`<li>${x}</li>`).join('')}</ul>
+    ${readout.warnings.length ? `<div class="section-title">Where this can go sideways</div><ul>${readout.warnings.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}
+  `;
+  document.getElementById('strategicReadout').innerHTML = strategic;
+
+  const timelineEl = document.getElementById('timeline');
+  timelineEl.innerHTML = ranges.map((p, idx) => {
+    let notes = [];
+    if (s.roleModel === 'distributor' && ['phase0','phase1','phase2'].includes(p.id)) notes.push('Distributor model increases licensing and trading-partner complexity.');
+    if (s.controlled === 'yes' && ['phase1','phase2','phase3','phase4'].includes(p.id)) notes.push('Controlled substances add security, reconciliation, and inspection burden.');
+    if (s.manipulation === 'yes' && ['phase1','phase2','phase3'].includes(p.id)) notes.push('Product manipulation pushes the lane toward a much heavier operating model.');
+    if (s.tempProfile === 'multi_band_including_frozen' && ['phase2','phase3','phase4'].includes(p.id)) notes.push('Frozen / multi-band scope adds qualification and monitoring depth.');
+    const gate = idx < ranges.length - 1 ? 'Decision gate: proceed, narrow, or stop before moving to the next burden tier.' : 'Exit gate: ready for first serious customer qualification cycle.';
+    return `
+      <article class="phase">
+        <h3>${p.title}</h3>
+        <div class="meta"><strong>Likely duration:</strong> ${fmtWeeks(p.weeks)}</div>
+        <div><strong>Goal:</strong> ${p.goal}</div>
+        <div class="section-title">Core workstreams</div>
+        <ul>${p.work.map(x=>`<li>${x}</li>`).join('')}</ul>
+        <div class="section-title">Outputs</div>
+        <ul>${p.outputs.map(x=>`<li>${x}</li>`).join('')}</ul>
+        ${notes.length ? `<div class="section-title">Scenario-specific pressure points</div><ul>${notes.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}
+        <div class="section-title">Gate</div>
+        <div>${gate}</div>
+      </article>
+    `;
+  }).join('');
+}
+for (const el of document.querySelectorAll('input, select')) el.addEventListener('input', render);
+render();
+</script>
+</body>
+</html>
