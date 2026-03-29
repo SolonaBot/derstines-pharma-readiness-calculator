@@ -278,6 +278,11 @@ const phases = [
     title: 'Phase 0 — Target lane definition',
     baseWeeks: [1, 2],
     goal: 'Define exactly what Derstine\'s is and is not trying to become in phase 1.',
+    owners: [
+      'ReguAssist: lane strategy lead',
+      'Derstine\'s leadership: commercial direction + risk appetite',
+      'Derstine\'s operations lead: current-state operational reality'
+    ],
     work: [
       'Leadership discovery and commercial-intent workshop',
       'Product / temperature / service-scope definition',
@@ -285,11 +290,22 @@ const phases = [
       'Explicit phase-1 exclusion list',
       'Client-safe claims boundary'
     ],
+    milestones: [
+      'Target lane selected',
+      'Role model selected: 3PL-style vs distributor-style',
+      'Excluded activities documented',
+      'Initial licensing hypothesis documented'
+    ],
     outputs: [
       'Target Service Lane Definition',
       'Phase-1 Exclusion List',
       'Preliminary licensing / authorization map',
       'Commercial positioning boundaries'
+    ],
+    clientGets: [
+      'A clear answer on what business they are actually entering',
+      'A safer phase-1 scope that avoids preventable overreach',
+      'A credible story for internal alignment and external discussions'
     ]
   },
   {
@@ -297,6 +313,12 @@ const phases = [
     title: 'Phase 1 — Readiness assessment',
     baseWeeks: [3, 4],
     goal: 'Measure the real gap between existing cold-storage capability and pharma-entry reality.',
+    owners: [
+      'ReguAssist: assessment lead',
+      'Derstine\'s QA/compliance owner or designate',
+      'Derstine\'s operations/warehouse lead',
+      'Derstine\'s facilities / engineering support as needed'
+    ],
     work: [
       'Facility / dock / segregation / backup-power review',
       'Monitoring / alarm / excursion / calibration review',
@@ -305,6 +327,13 @@ const phases = [
       'Licensing / authorization trigger analysis',
       'Customer qualification expectation analysis'
     ],
+    milestones: [
+      'Current-state interviews completed',
+      'Facility/control review completed',
+      'Documentation review completed',
+      'Risk-ranked gap map completed',
+      'ROM model calibrated to the actual site and scope'
+    ],
     outputs: [
       'Current-State Gap Assessment',
       'Readiness scorecard',
@@ -312,6 +341,11 @@ const phases = [
       'Licensing / authorization trigger map',
       'ROM estimate update',
       'Go / no-go / narrow-scope recommendation'
+    ],
+    clientGets: [
+      'A brutally honest view of what is missing',
+      'A fact-based investment picture',
+      'A decision-quality answer on whether the opportunity is worth pursuing'
     ]
   },
   {
@@ -319,6 +353,11 @@ const phases = [
     title: 'Phase 2 — Operating model and implementation blueprint',
     baseWeeks: [3, 5],
     goal: 'Convert the assessment into a buildable future-state design.',
+    owners: [
+      'ReguAssist: operating-model architect',
+      'Derstine\'s leadership: scope / budget decisions',
+      'Derstine\'s ops + QA leads: feasibility review'
+    ],
     work: [
       'Future-state operating model design',
       'Quality-system architecture',
@@ -328,12 +367,23 @@ const phases = [
       'Staffing and governance design',
       'Customer qualification framework'
     ],
+    milestones: [
+      'Future-state lane architecture approved',
+      'Control matrix finalized',
+      'Implementation sequence locked',
+      'Budget/timing model updated to the chosen lane'
+    ],
     outputs: [
       'Implementation roadmap',
       'QMS architecture and control matrix',
       'Monitoring / qualification roadmap',
       'Staffing and governance recommendations',
       'Client claims / communications guardrails'
+    ],
+    clientGets: [
+      'A step-by-step build plan instead of a vague recommendation',
+      'A map of exactly what to build first vs later',
+      'Executive clarity on staffing, controls, and spend sequence'
     ]
   },
   {
@@ -341,6 +391,12 @@ const phases = [
     title: 'Phase 3 — Build the lane',
     baseWeeks: [8, 14],
     goal: 'Implement the quality, operational, and evidence systems required for a bounded pharma lane.',
+    owners: [
+      'ReguAssist: implementation advisor / PMO lead',
+      'Derstine\'s QA owner',
+      'Derstine\'s ops / warehouse leadership',
+      'Derstine\'s systems / engineering support where needed'
+    ],
     work: [
       'SOP and controlled-document buildout',
       'Training and accountability implementation',
@@ -350,11 +406,23 @@ const phases = [
       'Traceability / reporting / system changes',
       'Management-review and implementation governance'
     ],
+    milestones: [
+      'Core SOP/control package live',
+      'Training matrix assigned and launched',
+      'Deviation/CAPA/change-control workflow live',
+      'Segregation / status-control model implemented',
+      'Management-review cadence established'
+    ],
     outputs: [
       'Controlled-document package',
       'Training matrix',
       'Operational workflow package',
       'Implementation tracker and remediation log'
+    ],
+    clientGets: [
+      'A real operating lane, not just a report',
+      'Documented controls leadership can defend',
+      'A structure that can survive customer scrutiny'
     ]
   },
   {
@@ -362,6 +430,11 @@ const phases = [
     title: 'Phase 4 — Qualification and audit readiness',
     baseWeeks: [4, 6],
     goal: 'Pressure-test the lane before a serious customer does.',
+    owners: [
+      'ReguAssist: qualification-readiness lead',
+      'Derstine\'s QA lead',
+      'Derstine\'s site leadership and accountable functions'
+    ],
     work: [
       'Mock audit / mock customer review',
       'Quality questionnaire preparation',
@@ -370,11 +443,22 @@ const phases = [
       'Claims language review',
       'Gap closeout for phase-1 launch'
     ],
+    milestones: [
+      'Mock audit completed',
+      'Qualification dossier assembled',
+      'Customer-facing language approved',
+      'Critical pre-launch gaps closed or explicitly managed'
+    ],
     outputs: [
       'Audit Readiness Package',
       'Customer Qualification Dossier',
       'Capability statement language',
       'Readiness opinion / remaining-gaps report'
+    ],
+    clientGets: [
+      'A customer-facing evidence pack',
+      'A clearer answer to “are we ready yet?”',
+      'A much lower chance of failing the first serious qualification cycle'
     ]
   },
   {
@@ -382,6 +466,11 @@ const phases = [
     title: 'Phase 5 — Pilot customer onboarding',
     baseWeeks: [4, 8],
     goal: 'Support the first serious customer qualification cycle without breaking the system.',
+    owners: [
+      'ReguAssist: customer-qualification support lead',
+      'Derstine\'s commercial lead',
+      'Derstine\'s QA + operations owners'
+    ],
     work: [
       'Customer technical-meeting support',
       'Audit / questionnaire response support',
@@ -389,10 +478,21 @@ const phases = [
       'Quality agreement support',
       'Initial onboarding / stabilization support'
     ],
+    milestones: [
+      'First real customer qualification cycle supported',
+      'Customer-specific gaps prioritized and addressed',
+      'Pilot onboarding stabilized',
+      'Lessons learned captured for lane-2 scaling'
+    ],
     outputs: [
       'Customer-specific qualification package',
       'Pilot onboarding support plan',
       'Post-pilot lessons learned and next-lane recommendations'
+    ],
+    clientGets: [
+      'Hands-on support during the highest-risk commercial moment',
+      'A cleaner path to first revenue in the lane',
+      'A repeatable base for broader expansion later'
     ]
   }
 ];
@@ -513,10 +613,16 @@ function render(){
         <h3>${p.title}</h3>
         <div class="meta"><strong>Likely duration:</strong> ${fmtWeeks(p.weeks)}</div>
         <div><strong>Goal:</strong> ${p.goal}</div>
+        <div class="section-title">Primary owners</div>
+        <ul>${p.owners.map(x=>`<li>${x}</li>`).join('')}</ul>
         <div class="section-title">Core workstreams</div>
         <ul>${p.work.map(x=>`<li>${x}</li>`).join('')}</ul>
+        <div class="section-title">Deliverable milestones</div>
+        <ul>${p.milestones.map(x=>`<li>${x}</li>`).join('')}</ul>
         <div class="section-title">Outputs</div>
         <ul>${p.outputs.map(x=>`<li>${x}</li>`).join('')}</ul>
+        <div class="section-title">What Derstine's gets at this stage</div>
+        <ul>${p.clientGets.map(x=>`<li>${x}</li>`).join('')}</ul>
         ${notes.length ? `<div class="section-title">Scenario-specific pressure points</div><ul>${notes.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}
         <div class="section-title">Gate</div>
         <div>${gate}</div>
